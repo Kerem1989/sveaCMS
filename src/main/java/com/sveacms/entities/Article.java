@@ -113,4 +113,18 @@ public class Article {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public void printHello() {
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+        System.out.println("Hello");
+    }
+
 }

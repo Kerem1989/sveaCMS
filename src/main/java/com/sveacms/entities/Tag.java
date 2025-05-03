@@ -50,4 +50,21 @@ public class Tag {
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
+    public class B {
+        public void printHello() {
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+            System.out.println("Hello");
+        }
+    }
+
+
 }
