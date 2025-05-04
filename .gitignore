@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# sensitive config
+src/main/resources/application-local.properties
