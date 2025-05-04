@@ -24,8 +24,4 @@ public class ArticleService {
     public void postArticle(Article article) {
         articleRepository.save(article);
     }
-
-    public void postArticle() {
-        System.out.println("Articles logged.");
-    }
 }
