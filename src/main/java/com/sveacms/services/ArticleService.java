@@ -26,6 +26,6 @@ public class ArticleService {
     }
 
     public void postArticle() {
-        System.out.printf("Posting article: %s\n", articleRepository.findAll());
+        System.out.printf("Posting article: %s%n", articleRepository.findAll());
     }
 }
