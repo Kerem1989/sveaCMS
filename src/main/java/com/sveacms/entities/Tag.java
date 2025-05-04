@@ -47,7 +47,7 @@ public class Tag {
         return articles;
     }
 
-    public void setArticle(List<Article> articles) {
+    public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 }
