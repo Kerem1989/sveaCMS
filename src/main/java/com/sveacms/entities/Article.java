@@ -114,26 +114,4 @@ public class Article {
         this.tags = tags;
     }
 
-    public void printHello() {
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-        System.out.println("Hello");
-    }
-
 }

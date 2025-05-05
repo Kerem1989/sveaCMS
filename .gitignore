@@ -1,3 +1,4 @@
+.env
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -12,6 +13,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+
 
 ### IntelliJ IDEA ###
 .idea
@@ -31,3 +34,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# sensitive config
+src/main/resources/application-local.properties
