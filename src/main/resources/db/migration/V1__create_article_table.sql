@@ -1,5 +1,5 @@
 CREATE TABLE article (
-                         id int AUTO_INCREMENT PRIMARY KEY,
+                         userId int AUTO_INCREMENT PRIMARY KEY,
                          title VARCHAR(255) NOT NULL,
                          slug VARCHAR(255) UNIQUE NOT NULL,
                          description TEXT,
