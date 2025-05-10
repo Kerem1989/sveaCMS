@@ -2,9 +2,9 @@ package com.sveacms.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="users")
@@ -22,8 +22,14 @@ public class User {
 
     private boolean IsActive;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registrationDate;
+    private LocalDateTime registrationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        if (registrationDate == null) {
+            registrationDate = LocalDateTime.from(LocalDate.now());
+        }
+    }
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "userTypeId", referencedColumnName ="userTypeId")
@@ -32,7 +38,7 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String email, String password, boolean isActive, Date registrationDate, UserType userTypeId) {
+    public User(int userId, String email, String password, boolean isActive, LocalDateTime registrationDate, UserType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -57,11 +63,11 @@ public class User {
         this.userTypeId = userTypeId;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 
