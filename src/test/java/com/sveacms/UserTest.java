@@ -4,9 +4,7 @@ import com.sveacms.entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,8 +50,8 @@ public class UserTest {
 
     @Test
     void testRegistrationDate() {
-        LocalDateTime registrationDate = LocalDateTime.now();
+        LocalDate registrationDate = LocalDate.now();
         user.setRegistrationDate(registrationDate);
-        assertEquals(LocalDateTime.now(), user.getRegistrationDate());
+        assertEquals(LocalDate.now(), user.getRegistrationDate());
     }
 }

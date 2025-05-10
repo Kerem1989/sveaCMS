@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="users")
@@ -22,12 +21,12 @@ public class User {
 
     private boolean IsActive;
 
-    private LocalDateTime registrationDate;
+    private LocalDate registrationDate;
 
     @PrePersist
     protected void onCreate() {
         if (registrationDate == null) {
-            registrationDate = LocalDateTime.from(LocalDate.now());
+            registrationDate = LocalDate.now();
         }
     }
 
@@ -38,7 +37,7 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String email, String password, boolean isActive, LocalDateTime registrationDate, UserType userTypeId) {
+    public User(int userId, String email, String password, boolean isActive, LocalDate registrationDate, UserType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -63,11 +62,11 @@ public class User {
         this.userTypeId = userTypeId;
     }
 
-    public LocalDateTime getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 
