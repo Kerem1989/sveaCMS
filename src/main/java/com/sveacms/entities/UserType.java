@@ -9,7 +9,7 @@ import java.util.List;
 public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userTypeId;
+    private int userTypeId;
 
     private String userTypeName;
 
@@ -19,17 +19,17 @@ public class UserType {
     public UserType() {
     }
 
-    public UserType(List<User> users, String userTypeName, Long userTypeId) {
+    public UserType(List<User> users, String userTypeName, int userTypeId) {
         this.users = users;
         this.userTypeName = userTypeName;
         this.userTypeId = userTypeId;
     }
 
-    public Long getUserTypeId() {
+    public int getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUserTypeId(Long userTypeId) {
+    public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
 
