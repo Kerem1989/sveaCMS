@@ -1,119 +1,94 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link
-            th:rel="stylesheet"
-            th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "
-    />
-    <link
-            rel="stylesheet"
-            type="text/css"
-            media="all"
-            th:href="@{/css/font-awesome.min.css}"
-    />
-    <link
-            rel="stylesheet"
-            type="text/css"
-            media="all"
-            th:href="@{/css/styles.css}"
-    />
-    <link
-            href="https://fonts.googleapis.com/css?family=Montserrat"
-            rel="stylesheet"
-    />
-    <meta charset="ISO-8859-1"/>
-    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register – SveaCMS</title>
+
+    <!-- Fonts and Styles from Softy Pinko -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo-softy-pinko.css}">
 </head>
 
 <body>
-<section class="content hidden-overflow">
-    <div class="row">
-        <div class="col-6 coffee_mug_background">
-            <div class="logo_left mt-3 pt-4 ms-5 pl-5">
-                <h2 class="logo" style="color: white">
-                    hotdevjobs <span class="logo_com">.com</span>
-                </h2>
+
+<!-- Header (optional if you have a global nav) -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a th:href="@{/}" class="logo">
+                        <img th:src="@{/images/logo.png}" alt="SveaCMS Logo"/>
+                    </a>
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/login}">Login</a></li>
+                        <li><a th:href="@{/register}" class="active">Register</a></li>
+                    </ul>
+                    <a class='menu-trigger'><span>Menu</span></a>
+                </nav>
             </div>
         </div>
-        <div class="col-6">
-            <div class="top-margin">
-                <div>
-                    <div class="d-flex justify-content-center mb-4">
-                        <h1 class="heading_font font-weight-bold">
-                            Create User Account
-                        </h1>
-                    </div>
-                    <div class="myForm">
-                        <form
-                                th:action="@{/register/new}"
-                                th:object="${user}"
-                                method="post"
-                        >
-                            <div class="box-body bozero mx2p">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input
-                                                    placeholder="Email"
-                                                    name="email"
-                                                    th:field="*{email}"
-                                                    type="email"
-                                                    style="width: 100%"
-                                                    class="form-control"
-                                                    required
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input
-                                                    min="8"
-                                                    placeholder="Password"
-                                                    name="password"
-                                                    th:field="*{password}"
-                                                    type="password"
-                                                    class="form-control pwd"
-                                                    required
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 form-group">
-                                        <select
-                                                required
-                                                class="form-control"
-                                                th:field="*{userTypeId}"
-                                        >
-                                            <th:block th:each="userType :${getAllTypes}">
-                                                <option
-                                                        th:text="${userType.userTypeName}"
-                                                        th:value="${userType.userTypeId}"
-                                                ></option>
-                                            </th:block>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div class="row">
-                                    <div class="form-group mt-5 col-md-12">
-                                        <button type="submit" class="myBtn py-3">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    </div>
+</header>
+
+<!-- Registration Form -->
+<section class="section" style="padding-top: 160px; background-color: #f9f9f9;">
+    <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Create Your Account</h2>
+                    <p>Please fill in the form below to get started with SveaCMS.</p>
                 </div>
+                <form th:action="@{/register/new}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <input type="email" th:field="*{email}" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" th:field="*{password}" class="form-control" placeholder="Password (min 8 characters)" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" th:field="*{userTypeId}" required>
+                            <option value="" disabled selected>Select User Type</option>
+                            <th:block th:each="userType : ${getAllTypes}">
+                                <option th:value="${userType.userTypeId}" th:text="${userType.userTypeName}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="main-button">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Footer -->
+<footer style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="copyright">
+                    &copy; 2025 SveaCMS – Built with Spring Boot & Thymeleaf
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script th:src="@{/js/jquery-2.1.0.min.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+
 </body>
-
-<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
 </html>
