@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SveaCMS is a modern and flexible content management system built with Spring Boot and Thymeleaf. Ideal for publishing, editing, and managing content quickly and securely.">
+    <meta name="author" content="">
+
+    <title>SveaCMS - Content Management System</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo-softy-pinko.css}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div><div></div><div></div>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- Logo -->
+                    <a th:href="@{/}" class="logo">
+                        <img th:src="@{/images/logo.png}" alt="SveaCMS Logo"/>
+                    </a>
+
+                    <!-- Menu -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}" class="active">Home</a></li>
+                        <li><a th:href="@{/login}">Login</a></li>
+                        <li><a th:href="@{/register}">Register</a></li>
+                    </ul>
+                    <a class='menu-trigger'><span>Menu</span></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Welcome Hero Section -->
+<div class="welcome-area" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12 text-center">
+                    <h1>Fast & Flexible <strong>Content Management</strong><br>with <strong>SveaCMS</strong></h1>
+                    <p>SveaCMS is a modern CMS powered by Spring Boot and Thymeleaf — ideal for teams and organizations that need fast, secure, and easy content publishing.</p>
+                    <a href="#features" class="main-button-slider mr-2">Explore Features</a>
+                    <a th:href="@{/register}" class="main-button-slider">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Section -->
+<section class="section" style="padding: 60px 0;">
+    <div class="container">
+        <form th:action="@{/global-search}" method="get" class="form-inline justify-content-center">
+            <input type="text" name="job" class="form-control mb-2 mr-sm-2" placeholder="Search for a job" th:value="${job}">
+            <input type="text" name="location" class="form-control mb-2 mr-sm-2" placeholder="Enter a location" th:value="${location}">
+            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Search</button>
+        </form>
+    </div>
+</section>
+
+<!-- Additional Template Sections -->
+<!-- Paste remaining sections here as needed, like features, testimonials, pricing, etc. -->
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="copyright">
+                    &copy; 2025 SveaCMS – Built with Spring Boot & Thymeleaf
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script th:src="@{/js/jquery-2.1.0.min.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scrollreveal.min.js}"></script>
+<script th:src="@{/js/waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/js/imgfix.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+
+</body>
+</html>
