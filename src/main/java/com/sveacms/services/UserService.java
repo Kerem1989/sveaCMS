@@ -4,6 +4,7 @@ import com.sveacms.entities.User;
 import com.sveacms.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -23,5 +24,9 @@ public class UserService {
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public ArrayList<User> findAll() {
+        return (ArrayList<User>) userRepository.findAll();
     }
 }
