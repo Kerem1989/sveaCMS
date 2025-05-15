@@ -48,8 +48,6 @@ public class Article {
         this.tags = tags;
     }
 
-    // --- Getters & Setters ---
-
     public int getId() {
         return id;
     }
