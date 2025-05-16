@@ -33,7 +33,7 @@ public class UserService {
         int userTypeId = user.getUserType().getUserTypeId();
         User savedUser = userRepository.save(user);
         System.out.println(savedUser);
-        if (userTypeId == 1) {
+        if (userTypeId == 2) {
             adminProfileRepository.save(new AdminProfile(savedUser));
         } else {
             userProfileRepository.save(new UserProfile(savedUser));
