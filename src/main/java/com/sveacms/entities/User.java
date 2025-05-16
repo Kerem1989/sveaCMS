@@ -24,7 +24,7 @@ public class User {
     private LocalDate registrationDate;
 
     @PrePersist
-    protected void onCreate() {
+    public void onCreate() {
         if (registrationDate == null) {
             registrationDate = LocalDate.now();
         }

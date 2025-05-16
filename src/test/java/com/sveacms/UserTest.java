@@ -1,6 +1,7 @@
 package com.sveacms;
 
 import com.sveacms.entities.User;
+import com.sveacms.entities.UserType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserTest {
+class UserTest {
 
     private User user;
 
@@ -35,13 +36,6 @@ public class UserTest {
         assertEquals("securePass123", user.getPassword());
     }
 
-
-    @Test
-    void testToStringNotNull() {
-        user.setEmail("example@test.com");
-        assertNotNull(user.toString());
-    }
-
     @Test
     void testIsActive() {
         user.setActive(true);
@@ -49,9 +43,44 @@ public class UserTest {
     }
 
     @Test
-    void testRegistrationDate() {
-        LocalDate registrationDate = LocalDate.now();
+    void testRegistrationDateSetter() {
+        LocalDate registrationDate = LocalDate.of(2024, 1, 1);
         user.setRegistrationDate(registrationDate);
-        assertEquals(LocalDate.now(), user.getRegistrationDate());
+        assertEquals(registrationDate, user.getRegistrationDate());
+    }
+
+    @Test
+    void testUserType() {
+        UserType type = new UserType();
+        type.setUserTypeId(1);
+        user.setUserType(type);
+        assertEquals(type, user.getUserType());
+    }
+
+    @Test
+    void testToStringContainsEmail() {
+        user.setEmail("visible@test.com");
+        assertTrue(user.toString().contains("visible@test.com"));
+    }
+
+    @Test
+    void testPrePersistSetsDateIfNull() {
+        assertNull(user.getRegistrationDate());
+        user.onCreate();
+        assertNotNull(user.getRegistrationDate());
+    }
+
+    @Test
+    void testFullConstructor() {
+        UserType type = new UserType();
+        LocalDate date = LocalDate.of(2025, 1, 1);
+        User fullUser = new User(5, "full@example.com", "pass", true, date, type);
+
+        assertEquals(5, fullUser.getUserId());
+        assertEquals("full@example.com", fullUser.getEmail());
+        assertEquals("pass", fullUser.getPassword());
+        assertTrue(fullUser.isActive());
+        assertEquals(date, fullUser.getRegistrationDate());
+        assertEquals(type, fullUser.getUserType());
     }
 }
