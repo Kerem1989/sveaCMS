@@ -39,6 +39,10 @@ public class UserProfile {
     public UserProfile() {
     }
 
+    public UserProfile(User user) {
+        this.userId = user;
+    }
+
     public String getProfilePhoto() {
         return profilePhoto;
     }

@@ -10,10 +10,10 @@ public class AdminProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long adminProfileId;
+    private int adminProfileId;
 
     @OneToOne
-    @JoinColumn(name = "user_Id")
+    @JoinColumn(name = "user_id")
     @MapsId
     private User userId;
 
@@ -34,7 +34,7 @@ public class AdminProfile {
     @Column(nullable=true, length=64)
     private String profilePhoto;
 
-    public AdminProfile(Long adminProfileId, User userId, String firstName, String lastName, String state, String city, String country, String company, String phone, String profilePhoto) {
+    public AdminProfile(int adminProfileId, User userId, String firstName, String lastName, String state, String city, String country, String company, String phone, String profilePhoto) {
         this.adminProfileId = adminProfileId;
         this.userId = userId;
         this.firstName = firstName;
@@ -50,11 +50,15 @@ public class AdminProfile {
     public AdminProfile() {
     }
 
-    public Long getAdminProfileId() {
+    public AdminProfile(User user) {
+        this.userId = user;
+    }
+
+    public int getAdminProfileId() {
         return adminProfileId;
     }
 
-    public void setAdminProfileId(Long adminProfileId) {
+    public void setAdminProfileId(int adminProfileId) {
         this.adminProfileId = adminProfileId;
     }
 
