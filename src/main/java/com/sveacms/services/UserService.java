@@ -3,13 +3,12 @@ package com.sveacms.services;
 import com.sveacms.entities.AdminProfile;
 import com.sveacms.entities.User;
 import com.sveacms.entities.UserProfile;
-import com.sveacms.entities.UserType;
 import com.sveacms.repositories.AdminProfileRepository;
 import com.sveacms.repositories.UserProfileRepository;
 import com.sveacms.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -45,7 +44,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public ArrayList<User> findAll() {
-        return (ArrayList<User>) userRepository.findAll();
+    public List<User> findAll() {
+        return (List<User>) userRepository.findAll();
     }
 }
