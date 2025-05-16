@@ -32,6 +32,7 @@ public class UserService {
         user.setActive(true);
         int userTypeId = user.getUserType().getUserTypeId();
         User savedUser = userRepository.save(user);
+        System.out.println(savedUser);
         if (userTypeId == 1) {
             adminProfileRepository.save(new AdminProfile(savedUser));
         } else {

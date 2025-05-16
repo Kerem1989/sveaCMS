@@ -58,7 +58,7 @@
                         <select class="form-control" th:field="*{userType}" required>
                             <option value="" disabled selected>Select User Type</option>
                             <th:block th:each="userType : ${getAllTypes}">
-                                <option th:value="${userType}" th:text="${userType.userTypeName}"></option>
+                                <option th:value="${userType.userTypeId}" th:text="${userType.userTypeName}"></option>
                             </th:block>
                         </select>
                     </div>
