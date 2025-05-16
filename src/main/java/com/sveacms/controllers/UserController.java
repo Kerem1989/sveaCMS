@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        List<UserType> userTypes = this.userTypeRepository.findAll();
+        List<UserType> userTypes = userTypeRepository.findAll();
         model.addAttribute("getAllTypes", userTypes);
         model.addAttribute("user", new User());
         return "register";
@@ -37,7 +37,7 @@ public class UserController {
         Optional<User> optionalUsers = userService.getUserByEmail(user.getEmail());
         if (optionalUsers.isPresent()) {
             model.addAttribute("error", "This email already exists, try another one");
-            List<UserType> userTypes = this.userTypeRepository.findAll();
+            List<UserType> userTypes = userTypeRepository.findAll();
             model.addAttribute("getAllTypes", userTypes);
             model.addAttribute("user", new User());
             return "register";

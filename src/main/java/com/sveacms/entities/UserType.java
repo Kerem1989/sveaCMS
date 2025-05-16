@@ -13,7 +13,7 @@ public class UserType {
 
     private String userTypeName;
 
-    @OneToMany(targetEntity = User.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
     private List<User> users;
 
     public UserType() {
