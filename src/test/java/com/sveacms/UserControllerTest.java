@@ -41,6 +41,20 @@ class UserControllerTest {
     }
 
     @Test
+    void testUserRegistration_NewEmail() throws Exception {
+        when(userService.getUserByEmail("new@example.com")).thenReturn(Optional.empty());
+
+        mockMvc.perform(post("/register/new")
+                        .param("email", "new@example.com")
+                        .param("password", "testpassword123")
+                        .param("userType.userTypeId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("dashboard"));
+
+        verify(userService).addNew(any(User.class));
+    }
+
+    @Test
     void testUserRegistration_EmailExists() throws Exception {
         User user = new User();
         user.setEmail("existing@example.com");
@@ -49,7 +63,9 @@ class UserControllerTest {
         when(userTypeRepository.findAll()).thenReturn(List.of(new UserType()));
 
         mockMvc.perform(post("/register/new")
-                        .param("email", "existing@example.com"))
+                        .param("email", "existing@example.com")
+                        .param("password", "secret123")
+                        .param("userType.userTypeId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("register"))
                 .andExpect(model().attributeExists("error"))
@@ -57,15 +73,5 @@ class UserControllerTest {
                 .andExpect(model().attributeExists("user"));
     }
 
-    @Test
-    void testUserRegistration_NewEmail() throws Exception {
-        when(userService.getUserByEmail("new@example.com")).thenReturn(Optional.empty());
 
-        mockMvc.perform(post("/register/new")
-                        .param("email", "new@example.com"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("dashboard"));
-
-        verify(userService).addNew(any(User.class));
-    }
 }
