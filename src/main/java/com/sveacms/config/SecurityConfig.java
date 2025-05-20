@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
-                ).cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable());
+                ).cors(Customizer.withDefaults());
         return http.build();
     }
 
