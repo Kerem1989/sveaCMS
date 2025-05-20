@@ -1,5 +1,6 @@
-package com.sveacms.controllers;
+package com.sveacms;
 
+import com.sveacms.controllers.UserController;
 import com.sveacms.entities.User;
 import com.sveacms.entities.UserType;
 import com.sveacms.services.UserService;
@@ -9,12 +10,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.*;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @WebMvcTest(UserController.class)
 class UserControllerTest {
@@ -29,6 +32,7 @@ class UserControllerTest {
     private UserTypeRepository userTypeRepository;
 
     @Test
+    @WithMockUser
     void testRegisterPageLoads() throws Exception {
         List<UserType> types = List.of(new UserType());
         when(userTypeRepository.findAll()).thenReturn(types);
@@ -41,13 +45,15 @@ class UserControllerTest {
     }
 
     @Test
+    @WithMockUser
     void testUserRegistration_NewEmail() throws Exception {
         when(userService.getUserByEmail("new@example.com")).thenReturn(Optional.empty());
 
         mockMvc.perform(post("/register/new")
                         .param("email", "new@example.com")
                         .param("password", "testpassword123")
-                        .param("userType.userTypeId", "1"))
+                        .param("userType.userTypeId", "1")
+                        .with(csrf())) // Lägg till CSRF-token
                 .andExpect(status().isOk())
                 .andExpect(view().name("dashboard"));
 
@@ -55,6 +61,7 @@ class UserControllerTest {
     }
 
     @Test
+    @WithMockUser
     void testUserRegistration_EmailExists() throws Exception {
         User user = new User();
         user.setEmail("existing@example.com");
@@ -65,13 +72,12 @@ class UserControllerTest {
         mockMvc.perform(post("/register/new")
                         .param("email", "existing@example.com")
                         .param("password", "secret123")
-                        .param("userType.userTypeId", "1"))
+                        .param("userType.userTypeId", "1")
+                        .with(csrf())) // Lägg till CSRF-token
                 .andExpect(status().isOk())
                 .andExpect(view().name("register"))
                 .andExpect(model().attributeExists("error"))
                 .andExpect(model().attributeExists("getAllTypes"))
                 .andExpect(model().attributeExists("user"));
     }
-
-
 }

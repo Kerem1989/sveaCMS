@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +30,9 @@ class UserServiceTest {
     @Mock
     private UserProfileRepository userProfileRepository;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     private User adminUser;
     private User regularUser;
 
@@ -35,9 +40,13 @@ class UserServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
+        // Mocka .encode så vi slipper null
+        when(passwordEncoder.encode(any(CharSequence.class))).thenReturn("encoded-password");
+
         adminUser = new User();
         adminUser.setUserId(1);
         adminUser.setEmail("admin@example.com");
+        adminUser.setPassword("adminpass");
         UserType adminType = new UserType();
         adminType.setUserTypeId(2); // Admin
         adminUser.setUserType(adminType);
@@ -45,6 +54,7 @@ class UserServiceTest {
         regularUser = new User();
         regularUser.setUserId(2);
         regularUser.setEmail("user@example.com");
+        regularUser.setPassword("userpass");
         UserType regularType = new UserType();
         regularType.setUserTypeId(1); // Regular
         regularUser.setUserType(regularType);
@@ -57,6 +67,7 @@ class UserServiceTest {
         User saved = userService.addNew(adminUser);
 
         assertTrue(saved.isActive());
+        verify(passwordEncoder).encode("adminpass");
         verify(userRepository).save(adminUser);
         verify(adminProfileRepository).save(any(AdminProfile.class));
         verify(userProfileRepository, never()).save(any(UserProfile.class));
@@ -69,6 +80,7 @@ class UserServiceTest {
         User saved = userService.addNew(regularUser);
 
         assertTrue(saved.isActive());
+        verify(passwordEncoder).encode("userpass");
         verify(userRepository).save(regularUser);
         verify(userProfileRepository).save(any(UserProfile.class));
         verify(adminProfileRepository, never()).save(any(AdminProfile.class));

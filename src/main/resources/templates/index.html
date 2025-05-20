@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="SveaCMS is a modern and flexible content management system built with Spring Boot and Thymeleaf. Ideal for publishing, editing, and managing content quickly and securely.">
+    <meta name="description" content="SveaCMS is a modern, scalable SaaS content management platform. Effortlessly publish, manage, and grow your digital presence with security and speed.">
     <meta name="author" content="">
 
     <title>SveaCMS - Content Management System</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
-    <link rel="stylesheet" th:href="@{/css/templatemo-softy-pinko.css}">
+    <link rel="stylesheet" th:href="@{/css/custom-header.css}">
+    <link rel="stylesheet" th:href="@{/css/custom-footer.css}">
+    <link rel="stylesheet" th:href="@{/css/custom-theme.css}">
 </head>
 
 <body>
@@ -22,81 +24,229 @@
     </div>
 </div>
 
-<!-- Header -->
-<header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- Logo -->
-                    <a th:href="@{/}" class="logo" style="font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">
-                        <span style="color: #1e3a8a;">Svea</span><span style="color: #3fb5f4;">CMS</span>
-                    </a>
-                    <!-- Menu -->
-                    <ul class="nav">
-                        <li><a th:href="@{/}" class="active">Home</a></li>
-                        <li><a th:href="@{/login}">Login</a></li>
-                        <li><a th:href="@{/register}">Register</a></li>
-                    </ul>
-                    <a class='menu-trigger'><span>Menu</span></a>
-                </nav>
+<!-- SveaCMS Header Hero Section -->
+<div class="header-blue">
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+                <img src="/assets/svea.png" alt="SveaCMS Logo">
+                <span class="visually-hidden">SveaCMS</span>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <a th:href="@{/login}" class="login">Log In</a>
+                    <a class="btn btn-light action-button" role="button" th:href="@{/register}">Register</a>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-
-<!-- Welcome Hero Section -->
-<div class="welcome-area" id="welcome">
-    <div class="header-text">
-        <div class="container">
-            <div class="row">
-                <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12 text-center">
-                    <h1>Fast & Flexible <strong>Content Management</strong><br>with <strong>SveaCMS</strong></h1>
-                    <p>SveaCMS is a modern CMS powered by Spring Boot and Thymeleaf — ideal for teams and organizations that need fast, secure, and easy content publishing.</p>
-                    <a href="#features" class="main-button-slider mr-2">Explore Features</a>
-                    <a th:href="@{/register}" class="main-button-slider">Get Started</a>
+    </nav>
+    <div class="container hero">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1 animate-fadeInUp">
+                <h1>Content Management for the Modern Web</h1>
+                <p class="lead">SveaCMS empowers teams to create, manage, and scale their digital presence with enterprise-grade security and unmatched performance.</p>
+                <div class="d-flex gap-3">
+                    <a class="btn btn-light btn-lg action-button" th:href="@{/register}" role="button">Register</a>
                 </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 text-center animate-fadeInUp">
+                <img src="/assets/heropic.avif" class="img-fluid rounded-4 shadow-lg" alt="SveaCMS Demo">
             </div>
         </div>
     </div>
 </div>
 
-<!-- Search Section -->
-<section class="section" style="padding: 60px 0;">
+<!-- Features Section -->
+<section id="features" class="section-spaced bg-light">
     <div class="container">
-        <form th:action="@{/global-search}" method="get" class="form-inline justify-content-center">
-            <input type="text" name="job" class="form-control mb-2 mr-sm-2" placeholder="Search for a job" th:value="${job}">
-            <input type="text" name="location" class="form-control mb-2 mr-sm-2" placeholder="Enter a location" th:value="${location}">
-            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Search</button>
-        </form>
+        <div class="section-title">
+            <h2>Powerful Features for Modern Teams</h2>
+            <p>Everything you need to manage your content effectively and scale your digital presence.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="mb-4">
+                        <i class="bi bi-lightning-charge text-primary fs-1"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p class="text-secondary">Experience blazing-fast content delivery with our global CDN and optimized infrastructure.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="mb-4">
+                        <i class="bi bi-shield-check text-primary fs-1"></i>
+                    </div>
+                    <h3>Enterprise Security</h3>
+                    <p class="text-secondary">Bank-grade security with advanced encryption, role-based access, and compliance features.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="mb-4">
+                        <i class="bi bi-people text-primary fs-1"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p class="text-secondary">Real-time collaboration tools for seamless teamwork and content management.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Additional Template Sections -->
-<!-- Paste remaining sections here as needed, like features, testimonials, pricing, etc. -->
+<!-- About Section -->
+<section id="about" class="section-spaced">
+    <div class="container">
+        <div class="row gy-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="about-image">
+                    <img src="/assets/aboutus.jpeg" class="img-fluid" alt="About SveaCMS">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="section-title text-start">
+                    <h2>Why Choose SveaCMS?</h2>
+                    <p>Built for modern teams who demand the best in content management.</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-feature">
+                        <div class="me-4">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <div>
+                            <h4>Scalable Infrastructure</h4>
+                            <p>Grow with confidence using our cloud-native architecture designed for high performance and reliability.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="me-4">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <div>
+                            <h4>24/7 Expert Support</h4>
+                            <p>Our dedicated support team is always ready to help you succeed with personalized assistance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section-spaced">
+    <div class="container">
+        <div class="section-title">
+            <h2>Get in Touch</h2>
+            <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper">
+                    <form class="contact-form">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Your name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Your email" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Your message" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
-<footer>
+<footer class="footer-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="copyright">
-                    &copy; 2025 SveaCMS – Built with Spring Boot & Thymeleaf
-                </p>
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                <div class="footer-brand">
+                    <div class="d-flex align-items-center gap-4">
+                        <img src="/assets/svea.png" alt="SveaCMS Logo" class="footer-logo">
+                        <p class="footer-description mb-0">A modern, scalable SaaS content management platform designed for teams who demand the best in content management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="footer-heading">Product</h5>
+                <ul class="footer-links">
+                    <li><a th:href="@{#features}">Features</a></li>
+                    <li><a th:href="@{#about}">About</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="footer-heading">Company</h5>
+                <ul class="footer-links">
+                    <li><a th:href="@{#contact}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-12">
+                    <p class="copyright">© 2025 SveaCMS. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/jquery-2.1.0.min.js}"></script>
 <script th:src="@{/js/popper.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/scrollreveal.min.js}"></script>
 <script th:src="@{/js/waypoints.min.js}"></script>
 <script th:src="@{/js/jquery.counterup.min.js}"></script>
-<script th:src="@{/js/imgfix.min.js}"></script>
-<script th:src="@{/js/custom.js}"></script>
+<script>
+    // Initialize ScrollReveal
+    ScrollReveal().reveal('.feature-card', {
+        delay: 200,
+        distance: '20px',
+        origin: 'bottom',
+        interval: 100
+    });
 
+    // Initialize CounterUp
+    $('.counter').counterUp({
+        delay: 10,
+        time: 1000
+    });
+</script>
 </body>
 </html>

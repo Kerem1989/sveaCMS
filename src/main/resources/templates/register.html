@@ -4,91 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register – SveaCMS</title>
-
-    <!-- Fonts and Styles from Softy Pinko -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
-    <link rel="stylesheet" th:href="@{/css/templatemo-softy-pinko.css}">
+    <link rel="stylesheet" th:href="@{/css/custom-header.css}">
+    <link rel="stylesheet" th:href="@{/css/custom-theme.css}">
 </head>
 
 <body>
-
-<!-- Header (optional if you have a global nav) -->
-<header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <a th:href="@{/}" class="logo">
-                        <img th:src="@{/images/logo.png}" alt="SveaCMS Logo"/>
-                    </a>
-                    <ul class="nav">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/login}">Login</a></li>
-                        <li><a th:href="@{/register}" class="active">Register</a></li>
-                    </ul>
-                    <a class='menu-trigger'><span>Menu</span></a>
-                </nav>
+<!-- SveaCMS Header -->
+<div class="header-blue">
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+                <img src="/assets/svea.png" alt="SveaCMS Logo">
+                <span class="visually-hidden">SveaCMS</span>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/#features}">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/#about}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/#contact}">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <a th:href="@{/login}" class="login">Log In</a>
+                    <a class="btn btn-light action-button" role="button" th:href="@{/register}">Register</a>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </nav>
+</div>
 
-<!-- Registration Form -->
-<section class="section" style="padding-top: 160px; background-color: #f9f9f9;">
-    <div th:if="${error}" class="alert alert-danger text-center" role="alert">
-        <p th:text="${error}"></p>
-    </div>
+<!-- Registration Form Section -->
+<section class="section-spaced">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="text-center mb-5">
-                    <h2 class="section-title">Create Your Account</h2>
-                    <p>Please fill in the form below to get started with SveaCMS.</p>
+            <div class="col-lg-10">
+                <div class="card text-black form-card">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <div class="text-center mb-5">
+                                    <h1 class="fw-bold display-5 mb-3" style="color: var(--text-main);">Create Your Account</h1>
+                                    <p class="text-secondary">Be among the first to experience SveaCMS and shape the future of content management.</p>
+                                </div>
+                                <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+                                    <p th:text="${error}"></p>
+                                </div>
+                                <form class="mx-1 mx-md-4" th:action="@{/register/new}" th:object="${user}" method="post">
+                                    <div class="mb-4">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                            <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Your Email" required />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password (min 8 characters)" minlength="8" required />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="userType" class="form-label">User Type</label>
+                                        <select class="form-select" th:field="*{userType}" id="userType" required>
+                                            <option value="" disabled selected>Select User Type</option>
+                                            <th:block th:each="userType : ${getAllTypes}">
+                                                <option th:value="${userType.userTypeId}" th:text="${userType.userTypeName}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="form-check d-flex justify-content-center mb-5">
+                                        <input class="form-check-input me-2" type="checkbox" required id="form2Example3c" />
+                                        <label class="form-check-label" for="form2Example3c">
+                                            I agree to all statements in <a href="#" class="link">Terms of service</a>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-lg action-button w-100">Create Account</button>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="mb-0">Already have an account? <a th:href="@{/login}" class="link">Log in</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <img src="/assets/heropic.avif" class="img-fluid rounded-4 shadow-lg animate-fadeInUp" alt="SveaCMS registration illustration">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form th:action="@{/register/new}" th:object="${user}" method="post">
-                    <div class="form-group">
-                        <input type="email" th:field="*{email}" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" th:field="*{password}" class="form-control" placeholder="Password (min 8 characters)" minlength="8" required>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" th:field="*{userType}" required>
-                            <option value="" disabled selected>Select User Type</option>
-                            <th:block th:each="userType : ${getAllTypes}">
-                                <option th:value="${userType.userTypeId}" th:text="${userType.userTypeName}"></option>
-                            </th:block>
-                        </select>
-                    </div>
-                    <div class="form-group text-center mt-4">
-                        <button type="submit" class="main-button">Register</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Footer -->
-<footer style="margin-top: 100px;">
+<footer class="footer-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p class="copyright">
-                    &copy; 2025 SveaCMS – Built with Spring Boot & Thymeleaf
-                </p>
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                <div class="footer-brand">
+                    <div class="d-flex align-items-center gap-4">
+                        <img src="/assets/svea.png" alt="SveaCMS Logo" class="footer-logo">
+                        <p class="footer-description mb-0">A modern, scalable SaaS content management platform designed for teams who demand the best in content management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="footer-heading">Product</h5>
+                <ul class="footer-links">
+                    <li><a th:href="@{/#features}">Features</a></li>
+                    <li><a th:href="@{/#about}">About</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="footer-heading">Company</h5>
+                <ul class="footer-links">
+                    <li><a th:href="@{/#contact}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-12">
+                    <p class="copyright">© 2024 SveaCMS. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- Scripts -->
-<script th:src="@{/js/jquery-2.1.0.min.js}"></script>
-<script th:src="@{/js/popper.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/custom.js}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
