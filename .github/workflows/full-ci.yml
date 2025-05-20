@@ -64,13 +64,13 @@ jobs:
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-        smoke-test:
-            name: Smoke Test - Render Deployment
-            runs-on: ubuntu-latest
-            needs: gitguardian
+  smoke-test:
+    name: Smoke Test - Render Deployment
+    runs-on: ubuntu-latest
+    needs: gitguardian
 
-            steps:
-              - name: Kontrollera att Render-sidan är uppe
-                run: |
-                  echo "Kör smoke-test mot Render..."
-                  curl -f https://sveacms.onrender.com/actuator/health || exit 1
+    steps:
+      - name: Kontrollera att Render-sidan är uppe
+        run: |
+          echo "Kör smoke-test mot Render..."
+          curl -f https://sveacms.onrender.com/actuator/health || exit 1
